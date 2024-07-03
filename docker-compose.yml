@@ -1,0 +1,36 @@
+version: '3'
+services:
+  nodejs-1:
+    build: ./backend_service1
+    hostname: node1
+    ports:
+      - '3001:3001'
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_PORT=3307
+      - DB_USER=root
+      - DB_PASSWORD=
+      - DB_NAME=data_test
+      
+  nodejs-2:
+    build: ./backend_service2
+    hostname: node2
+    ports:
+      - '3002:3002'
+    environment:
+      - DB_HOST=host.docker.internal
+      - DB_PORT=3307
+      - DB_USER=root
+      - DB_PASSWORD=
+      - DB_NAME=data_test
+
+  nginx:
+    build: ./nginx
+    ports:
+      - '80:80'
+    depends_on:
+      - nodejs-1
+      - nodejs-2
+    
+
+  

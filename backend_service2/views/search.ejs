@@ -1,0 +1,50 @@
+<!-- search.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Search Results</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Search Results</h1>
+  <form action="/search" method="GET">
+    <input type="text" name="term" value="<%= searchTerm %>" />
+    <button type="submit">Search</button>
+  </form>
+  <% if (results.length > 0) { %>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Date Registed</th>
+        <th>Last Login</th>
+      </tr>
+      <% results.forEach((row) => { %>
+        <tr>
+          <td><%= row.id %></td>
+          <td><%= row.usersname %></td>
+          <td><%= row.registered %></td>
+          <td><%= row.lastlogin %></td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } else { %>
+    <p>No results found</p>
+  <% } %>
+</body>
+</html>
